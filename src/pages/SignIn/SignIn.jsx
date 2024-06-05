@@ -1,20 +1,31 @@
 import getFastApiErrors from "../../utils/getFastApiErrors";
 import FastInformation from "./components/FastInformation";
 import { useMutation } from "@tanstack/react-query";
+import AppContext from "../../context/AppProvider";
 import { toast } from "react-toastify";
 import Form from "./components/Form";
+import { useContext } from "react";
 import axios from "axios";
 
-const SignUp = () => {
+const SignIn = () => {
+  const { setUserInfo } = useContext(AppContext);
+
   const { mutate } = useMutation({
     mutationFn: async (userInfo) => {
       return await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/register`,
+        `${import.meta.env.VITE_BASE_URL}/users/login`,
         userInfo
       );
     },
     onSuccess: (res) => {
-      toast.success("¡Successfully registered!");
+      toast.success("¡Successfully logged in!");
+      localStorage.setItem("userInfo", JSON.stringify(res.data));
+      setUserInfo(res.data);
+
+      // Placing globally the token
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${res?.data?.access_token}`;
     },
     onError: (err) => {
       toast.error(getFastApiErrors(err));
@@ -24,30 +35,18 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const userInfo = {
-      email: e?.target?.email?.value.trim(),
-      password: e?.target?.password?.value.trim(),
-      name: e?.target?.name?.value.trim(),
-    };
+    const formData = new FormData(e?.target);
+
+    formData.append("username", e?.target?.email?.value.trim());
+    formData.append("password", e?.target?.password?.value.trim());
 
     // Form validation
-    if (
-      [
-        userInfo?.email,
-        userInfo?.password,
-        userInfo?.name,
-        e?.target?.repeatPassword?.value,
-      ].includes("")
-    ) {
+    if ([formData.get("username"), formData.get("password")].includes("")) {
       return toast.error("¡Fill up the blanks available!");
-    } else if (
-      e?.target?.password?.value !== e?.target?.repeatPassword?.value
-    ) {
-      return toast.error("¡Passwords are not the same!");
     }
 
-    // Sign up user
-    mutate(userInfo);
+    // Sign in user
+    mutate(formData);
   };
 
   return (
@@ -62,4 +61,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

@@ -1,26 +1,17 @@
 import { InputForm } from "../../../components/InputForm";
-import { Link } from "react-router-dom";
-
 import clouds from "../../../assets/clouds.png";
+import { Link } from "react-router-dom";
 
 const Form = ({ handleSubmit }) => {
   return (
     <form
-      onSubmit={handleSubmit}
       className={`flex-1 p-4 rounded-e-2xl bg-no-repeat bg-cover`}
       style={{ backgroundImage: `url(${clouds})` }}
+      onSubmit={handleSubmit}
     >
       <h2 className="text-center heading-title text-[1.6rem] mb-10">
-        Create your account
+        Sign in to your account
       </h2>
-
-      <InputForm
-        inputName={"name"}
-        inputType={"text"}
-        inputLabel={"Name"}
-        inputPlaceholder={"Enter your name"}
-        inputLabelClassName={"relative"}
-      />
 
       <InputForm
         inputName={"email"}
@@ -38,30 +29,22 @@ const Form = ({ handleSubmit }) => {
         inputLabelClassName={"relative mb-6 block"}
       />
 
-      <InputForm
-        inputName={"repeatPassword"}
-        inputType={"text"}
-        inputLabel={"Repeat Password"}
-        inputPlaceholder={"Confirm your password"}
-        inputLabelClassName={"relative"}
-      />
-
       <div className="flex mt-4 gap-3">
         <div>
           <button
             type="submit"
-            className="bg-secondary-color hover:bg-secondary-color/75 animation-fade text-white rounded-full px-6 py-1"
+            className="border-[#C4C4C4] border text-[#C4C4C4] hover:bg-[#C8C8C8]/90 hover:text-[#FFFFFF] animation-fade rounded-full px-6 py-1"
           >
-            Sign Up
+            Sign In
           </button>
         </div>
 
         <div>
           <Link
-            to={"/sign-in"}
-            className="border-[#C4C4C4] border text-[#C4C4C4] hover:bg-[#C8C8C8]/90 hover:text-[#FFFFFF] animation-fade rounded-full px-6 py-1 block"
+            to={"/sign-up"}
+            className="bg-secondary-color hover:bg-secondary-color/75 animation-fade text-white rounded-full px-6 py-1 block"
           >
-            Sign In
+            Sign Up
           </Link>
         </div>
       </div>
