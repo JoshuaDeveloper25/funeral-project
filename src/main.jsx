@@ -16,29 +16,43 @@ import Root from "./pages/Root";
 import SignUp from "./pages/SignUp/SignUp";
 import Verified from "./pages/Verified/Verified";
 import SignIn from "./pages/SignIn/SignIn";
+import Home from "./pages/Home/Home";
+
+import PublicRoutes from "./auth/PublicRoutes";
+import PrivateRoutes from "./auth/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
-    element: <Root />,
+    element: <PublicRoutes />,
     children: [
       {
-        element: <h2>Home</h2>,
+        element: <Root />,
+        children: [
+          {
+            element: <SignUp />,
+            path: "/sign-up",
+          },
+
+          {
+            element: <SignIn />,
+            path: "/sign-in",
+          },
+
+          {
+            element: <Verified />,
+            path: "/verified/:tokenId",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    element: <PrivateRoutes />,
+    children: [
+      {
+        element: <Home />,
         index: true,
-      },
-
-      {
-        element: <SignUp />,
-        path: "/sign-up",
-      },
-
-      {
-        element: <SignIn />,
-        path: "/sign-in",
-      },
-
-      {
-        element: <Verified />,
-        path: "/verified/:tokenId",
       },
     ],
   },
