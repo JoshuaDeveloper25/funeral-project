@@ -2,7 +2,7 @@ import logo from "../../../assets/funeral-logo.png";
 
 const FastInformation = () => {
   return (
-    <div className="flex-1 p-6 text-center rounded-s-2xl bg-gradient-to-b from-secondary-color to-secondary-color/85 text-white">
+    <div className="relative -z-[100] flex-1 p-6 text-center rounded-s-2xl bg-gradient-to-b from-secondary-color to-secondary-color/85 text-white">
       <h2 className="text-lg font-semibold">Welcome to</h2>
       <img
         loading="lazy"

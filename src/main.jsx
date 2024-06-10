@@ -51,8 +51,13 @@ const router = createBrowserRouter([
     element: <PrivateRoutes />,
     children: [
       {
-        element: <Home />,
-        index: true,
+        element: <Root />,
+        children: [
+          {
+            element: <Home />,
+            index: true,
+          },
+        ],
       },
     ],
   },

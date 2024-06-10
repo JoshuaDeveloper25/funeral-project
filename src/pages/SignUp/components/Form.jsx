@@ -7,10 +7,11 @@ const Form = ({ handleSubmit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={`flex-1 p-4 rounded-e-2xl bg-no-repeat bg-cover`}
-      style={{ backgroundImage: `url(${clouds})` }}
+      className={`flex-1 rounded-e-2xl px-10`}
     >
-      <h2 className="text-center heading-title text-[1.6rem] mb-10">
+      <img src={clouds} className="absolute top-14 -z-[2] -right-8 h-[80vh]" />
+
+      <h2 className="text-center heading-title text-[1.6rem] pb-3">
         Create your account
       </h2>
 
