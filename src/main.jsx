@@ -20,6 +20,8 @@ import Home from "./pages/Home/Home";
 
 import PublicRoutes from "./auth/PublicRoutes";
 import PrivateRoutes from "./auth/PrivateRoutes";
+import Settings from "./pages/Settings/Settings";
+import Account from "./pages/Settings/pages/Account/Account";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,17 @@ const router = createBrowserRouter([
         children: [
           {
             element: <Home />,
+            index: true,
+          },
+        ],
+      },
+
+      {
+        element: <Settings />,
+        path: "/settings/",
+        children: [
+          {
+            element: <Account />,
             index: true,
           },
         ],

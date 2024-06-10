@@ -32,4 +32,12 @@ body {
   .form-input-normal {
     @apply mt-2 animation-fade w-full outline-none block border-b-2 border-primary-color;
   }
+
+  .dashboard-active {
+    @apply bg-black text-white px-5 py-3 w-full inline-block font-bold;
+  }
+
+  .dashboard-inactive {
+    @apply hover:bg-slate-200 hover:animation-fade px-5 py-3 w-full inline-block font-medium;
+  }
 }
