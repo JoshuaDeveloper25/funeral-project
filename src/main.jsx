@@ -17,11 +17,12 @@ import SignUp from "./pages/SignUp/SignUp";
 import Verified from "./pages/Verified/Verified";
 import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
+import Settings from "./pages/Settings/Settings";
+import Account from "./pages/Settings/pages/Account/Account";
+import MyProfiles from "./pages/MyProfiles/MyProfiles";
 
 import PublicRoutes from "./auth/PublicRoutes";
 import PrivateRoutes from "./auth/PrivateRoutes";
-import Settings from "./pages/Settings/Settings";
-import Account from "./pages/Settings/pages/Account/Account";
 
 const router = createBrowserRouter([
   {
@@ -59,12 +60,17 @@ const router = createBrowserRouter([
             element: <Home />,
             index: true,
           },
+
+          {
+            element: <MyProfiles />,
+            path: "/my-profiles/",
+          },
         ],
       },
 
       {
         element: <Settings />,
-        path: "/settings/",
+        path: "/settings/:id",
         children: [
           {
             element: <Account />,

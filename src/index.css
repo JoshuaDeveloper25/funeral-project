@@ -40,4 +40,12 @@ body {
   .dashboard-inactive {
     @apply hover:bg-slate-200 hover:animation-fade px-5 py-3 w-full inline-block font-medium;
   }
+
+  .btn {
+    @apply w-full py-2 px-4 rounded-lg font-medium cursor-pointer;
+  }
+
+  .btn-blue {
+    @apply bg-primary-color text-white;
+  }
 }

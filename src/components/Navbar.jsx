@@ -12,7 +12,9 @@ const Navbar = () => {
         <div className="container-page px-2">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-white italic tracking-widest text-xl">Logo</h1>
+              <h1 className="text-white italic tracking-widest text-xl">
+                Logo
+              </h1>
             </div>
 
             <div>
@@ -37,8 +39,19 @@ const Navbar = () => {
                   )}
 
                   <ul className="absolute right-24 shadow-lg bg-white py-2 z-[1000]  w-max rounded max-h-96 overflow-auto">
-                    <li className="py-2.5 px-5 hover:bg-primary-color hover:text-white font-semibold animation-fade text-black text-sm cursor-pointer">
+                    <li className="hover:bg-primary-color hover:text-white font-semibold animation-fade text-black text-sm cursor-pointer">
                       <Link
+                        className="py-2.5 px-5 block"
+                        onClick={() => setOpenDropDown(false)}
+                        to={"/my-profiles/"}
+                      >
+                        My Profiles
+                      </Link>
+                    </li>
+
+                    <li className="hover:bg-primary-color hover:text-white font-semibold animation-fade text-black text-sm cursor-pointer">
+                      <Link
+                        className="py-2.5 px-5 block"
                         onClick={() => setOpenDropDown(false)}
                         to={"/settings/"}
                       >

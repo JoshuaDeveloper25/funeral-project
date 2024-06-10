@@ -1,14 +1,36 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { IoArrowBack, IoCloseSharp } from "react-icons/io5";
 import { Menu, Sidebar } from "react-pro-sidebar";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
+import axios from "axios";
 
 import logo from "../../assets/funeral-logo.png";
 
 const Settings = () => {
   const [toggled, setToggled] = useState(false);
   const location = useLocation();
+  const params = useParams();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["profile"],
+    queryFn: async () =>
+      await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/remembereds/get-profile/${params?.id}`
+      ),
+  });
+
+  console.log(data);
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (error) {
+    return console.log(error);
+  }
 
   return (
     <div className="flex h-full min-h-[100vh]">

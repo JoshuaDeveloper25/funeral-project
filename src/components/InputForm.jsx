@@ -11,12 +11,11 @@ export const InputForm = ({
     <label className={inputLabelClassName}>
       <span>{inputLabel}</span>
       <input
-        className="form-input-focus form-input-normal "
+        className="form-input-focus form-input-normal"
         placeholder={inputPlaceholder}
         type={inputType}
         name={inputName}
       />
-      <FaCheck className="absolute top-11 right-1 text-primary-color" />
     </label>
   );
 };
