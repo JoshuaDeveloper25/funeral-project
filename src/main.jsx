@@ -18,8 +18,8 @@ import Verified from "./pages/Verified/Verified";
 import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
 import Settings from "./pages/Settings/Settings";
-import Account from "./pages/Settings/pages/Account/Account";
 import MyProfiles from "./pages/MyProfiles/MyProfiles";
+import SettingsHome from "./pages/Settings/pages/Home/SettingsHome";
 
 import PublicRoutes from "./auth/PublicRoutes";
 import PrivateRoutes from "./auth/PrivateRoutes";
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
         path: "/settings/:id",
         children: [
           {
-            element: <Account />,
+            element: <SettingsHome />,
             index: true,
           },
         ],

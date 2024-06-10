@@ -1,36 +1,39 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { IoArrowBack, IoCloseSharp } from "react-icons/io5";
+import { useMutation } from "@tanstack/react-query";
 import { Menu, Sidebar } from "react-pro-sidebar";
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import Form from "./pages/Home/components/Form";
+import Modal from "../../components/Modal";
+import { FaImage } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
-import axios from "axios";
 
 import logo from "../../assets/funeral-logo.png";
 
 const Settings = () => {
+  const [openModal, setOpenModal] = useState(false);
   const [toggled, setToggled] = useState(false);
   const location = useLocation();
-  const params = useParams();
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["profile"],
-    queryFn: async () =>
-      await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/remembereds/get-profile/${params?.id}`
+  const uploadImageMutation = useMutation({
+    mutationFn: async (imageInfo) =>
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/remembereds/create-profile`,
+        imageInfo
       ),
+    onSuccess: (res) => {
+      toast.success("¡Perfil creado exitosamente!");
+      navigate(`/settings/${res?.data?.id}`);
+    },
+    onError: (err) => {
+      console.log(err);
+      toast.error(getFastApiErrors(err));
+    },
   });
 
-  console.log(data);
-
-  if (isLoading) {
-    return <h2>Loading...</h2>;
-  }
-
-  if (error) {
-    return console.log(error);
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="flex h-full min-h-[100vh]">
@@ -60,30 +63,23 @@ const Settings = () => {
             <img className="w-20 mx-auto mb-6" src={logo} />
           </NavLink>
 
-          {/* Account */}
-          <NavLink
-            className={
-              location?.pathname === "/settings/"
-                ? "dashboard-active"
-                : "dashboard-inactive"
-            }
-            to="/settings/"
-          >
-            Account
-          </NavLink>
-
-          <NavLink
-            className={
-              location?.pathname === "/settings/profile"
-                ? "dashboard-active"
-                : "dashboard-inactive"
-            }
-            to="#"
-          >
-            Profile
-          </NavLink>
+          <div className="px-3">
+            {/* Change Image */}
+            <button onClick={() => setOpenModal(true)}>
+              <FaImage className="inline me-2" /> Change Image
+            </button>
+          </div>
         </Menu>
       </Sidebar>
+
+      <Modal
+        titleModal={"Change Image"}
+        handleSubmit={handleSubmit}
+        setOpenModal={setOpenModal}
+        openModal={openModal}
+      >
+        <Form isPending={uploadImageMutation?.isPending} />
+      </Modal>
 
       <main className="flex-[60%] p-2">
         <div className="md:block flex flex-col md:flex-row">

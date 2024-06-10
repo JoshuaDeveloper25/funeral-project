@@ -17,7 +17,7 @@ const Modal = ({
           id="crud-modal"
           tabIndex="-1"
           aria-hidden="true"
-          className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full min-h-full bg-black/50"
+          className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-[100] flex justify-center items-center w-full min-h-full bg-black/50"
         >
           <div className="relative p-4 w-full max-w-md mx-auto ">
             {/* Modal content */}
