@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { IoArrowBack, IoCloseSharp } from "react-icons/io5";
 import { useMutation } from "@tanstack/react-query";
 import { Menu, Sidebar } from "react-pro-sidebar";
@@ -14,16 +14,19 @@ const Settings = () => {
   const [openModal, setOpenModal] = useState(false);
   const [toggled, setToggled] = useState(false);
   const location = useLocation();
+  const params = useParams();
 
-  const uploadImageMutation = useMutation({
+  const changeImageMutation = useMutation({
     mutationFn: async (imageInfo) =>
       await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/remembereds/create-profile`,
+        `${import.meta.env.VITE_BASE_URL}/remembereds/upload_cover_image/${
+          params?.id
+        }`,
         imageInfo
       ),
     onSuccess: (res) => {
+      console.log(res);
       toast.success("¡Perfil creado exitosamente!");
-      navigate(`/settings/${res?.data?.id}`);
     },
     onError: (err) => {
       console.log(err);
@@ -78,7 +81,7 @@ const Settings = () => {
         setOpenModal={setOpenModal}
         openModal={openModal}
       >
-        <Form isPending={uploadImageMutation?.isPending} />
+        <Form isPending={changeImageMutation?.isPending} />
       </Modal>
 
       <main className="flex-[60%] p-2">
