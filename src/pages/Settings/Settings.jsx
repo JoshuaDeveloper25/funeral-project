@@ -36,6 +36,17 @@ const Settings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const user_request = confirm(`Are you sure you want to change the image?`);
+
+    if (!user_request) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("uploadImages", e?.target?.files[0]);
+
+    changeImageMutation?.mutate(formData);
   };
 
   return (
