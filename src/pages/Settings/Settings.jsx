@@ -26,7 +26,7 @@ const Settings = () => {
       ),
     onSuccess: (res) => {
       console.log(res);
-      toast.success("¡Perfil creado exitosamente!");
+      toast.success("¡Image uploaded successfully!");
     },
     onError: (err) => {
       console.log(err);
