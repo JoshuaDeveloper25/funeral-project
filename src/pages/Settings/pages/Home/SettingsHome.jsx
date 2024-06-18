@@ -30,11 +30,8 @@ const Home = () => {
       <div className="">
         {/* Cover */}
         <img
-          // src={`${data?.data?.cover_images?.cloud_front_domain}/${data?.data?.cover_images?.aws_file_name}`}
-          src={
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-          className="w-full h-80 object-cover"
+          src={`${data?.data?.cover_images?.cloud_front_domain}/${data?.data?.cover_images?.aws_file_name}`}
+          className="w-full h-96"
         />
 
         {/* User Image */}
