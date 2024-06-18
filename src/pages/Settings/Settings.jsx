@@ -1,16 +1,24 @@
 import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
+import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { IoArrowBack, IoCloseSharp } from "react-icons/io5";
 import { useMutation } from "@tanstack/react-query";
-import { Menu, Sidebar } from "react-pro-sidebar";
+import AppContext from "../../context/AppProvider";
 import Form from "./pages/Home/components/Form";
+import { useContext, useState } from "react";
 import Modal from "../../components/Modal";
 import { FaImage } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
-import { useState } from "react";
 
 import logo from "../../assets/funeral-logo.png";
 
 const Settings = () => {
+  const {
+    triggerEffect,
+    setTriggerEffect,
+    profilePosition,
+    setProfilePosition,
+    setProfileShapeImage
+  } = useContext(AppContext);
   const [openModal, setOpenModal] = useState(false);
   const [toggled, setToggled] = useState(false);
   const location = useLocation();
@@ -44,7 +52,7 @@ const Settings = () => {
         onBackdropClick={() => setToggled(false)}
         className="flex-1 bg-primary-color"
         toggled={toggled}
-        breakPoint="sm"
+        breakPoint="md"
       >
         <Menu>
           {/* Icono Flecha */}
@@ -56,7 +64,7 @@ const Settings = () => {
             <div>
               <IoCloseSharp
                 onClick={() => setToggled(false)}
-                className="min-[577px]:hidden size-6 cursor-pointer"
+                className="min-[768px]:hidden size-6 cursor-pointer"
               />
             </div>
           </div>
@@ -65,6 +73,40 @@ const Settings = () => {
           <NavLink to={"/settings/"}>
             <img className="w-20 mx-auto mb-6" src={logo} />
           </NavLink>
+
+          <SubMenu label="Profile Effect">
+            <MenuItem onClick={() => setTriggerEffect(false)}>
+              {" "}
+              Default
+            </MenuItem>
+            <MenuItem onClick={() => setTriggerEffect(1)}> Effect 1</MenuItem>
+          </SubMenu>
+
+          <SubMenu label="Profile Position">
+            <MenuItem onClick={() => setProfilePosition("left")}>
+              {" "}
+              Left
+            </MenuItem>
+            <MenuItem onClick={() => setProfilePosition("center")}>
+              {" "}
+              Center
+            </MenuItem>
+            <MenuItem onClick={() => setProfilePosition("right")}>
+              {" "}
+              Right
+            </MenuItem>
+          </SubMenu>
+
+          <SubMenu label="Shape Profile Image">
+            <MenuItem onClick={() => setProfileShapeImage("circle")}>
+              {" "}
+              Rounded
+            </MenuItem>
+            <MenuItem onClick={() => setProfileShapeImage("square")}>
+              {" "}
+              Square
+            </MenuItem>
+          </SubMenu>
 
           <div className="px-3">
             {/* Change Image */}
@@ -84,11 +126,11 @@ const Settings = () => {
         <Form isPending={changeImageMutation?.isPending} />
       </Modal>
 
-      <main className="flex-[60%] p-2">
+      <main className="flex-[75%] p-2 overflow-x-hidden">
         <div className="md:block flex flex-col md:flex-row">
           {/* Hamburguer Button */}
           <button
-            className="sb-button min-[577px]:hidden"
+            className="sb-button min-[768px]:hidden"
             onClick={() => setToggled(!toggled)}
           >
             <FiMenu className="size-8" />
