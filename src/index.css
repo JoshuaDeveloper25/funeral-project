@@ -51,6 +51,7 @@ body {
 }
 
 .box {
+  position: relative;
   overflow: hidden;
   border-radius: 50%;
   background: black;

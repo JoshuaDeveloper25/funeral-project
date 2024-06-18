@@ -1,13 +1,7 @@
 import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { IoArrowBack, IoCloseSharp } from "react-icons/io5";
-<<<<<<< HEAD
-import { useMutation } from "@tanstack/react-query";
-import AppContext from "../../context/AppProvider";
-=======
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Menu, Sidebar } from "react-pro-sidebar";
->>>>>>> ImageUpload
 import Form from "./pages/Home/components/Form";
 import { useContext, useState } from "react";
 import Modal from "../../components/Modal";
@@ -17,19 +11,18 @@ import { FiMenu } from "react-icons/fi";
 import logo from "../../assets/funeral-logo.png";
 import axios from "axios";
 import { toast } from "react-toastify";
+import AppContext from "../../context/AppProvider";
 
 const Settings = () => {
-<<<<<<< HEAD
   const {
     triggerEffect,
     setTriggerEffect,
     profilePosition,
     setProfilePosition,
-    setProfileShapeImage
+    setProfileShapeImage,
   } = useContext(AppContext);
-=======
+
   const [images, setImages] = useState([]);
->>>>>>> ImageUpload
   const [openModal, setOpenModal] = useState(false);
   const [toggled, setToggled] = useState(false);
   const queryClient = useQueryClient();
@@ -73,8 +66,6 @@ const Settings = () => {
     const formData = new FormData();
     formData.append("file", images[0].file);
 
-    console.log(formData);
-    // return;
     changeImageMutation?.mutate(formData);
   };
 

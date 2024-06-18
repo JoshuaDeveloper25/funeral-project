@@ -38,8 +38,8 @@ const Home = () => {
         {triggerEffect === 1 ? (
           <div
             className={`${
-              profileShapeImage === "circle" ? "box relative" : null
-            } top-52 ${
+              profileShapeImage === "circle" ? "box -mt-20" : null
+            } ${
               profilePosition === "center"
                 ? "max-w-lg mx-auto"
                 : profilePosition === "right"
