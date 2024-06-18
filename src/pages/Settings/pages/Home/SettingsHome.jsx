@@ -26,7 +26,7 @@ const Home = () => {
       <div>
         <img
           src={`${data?.data?.cover_images?.cloud_front_domain}/${data?.data?.cover_images?.aws_file_name}`}
-          className="w-full h-64 object-cover"
+          className="w-full h-96"
         />
         <div className="h-36 w-36 bg-primary-color sticky z-50 rounded-full ms-8 -mt-20"></div>
       </div>

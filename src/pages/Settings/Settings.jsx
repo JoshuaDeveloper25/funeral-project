@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { IoArrowBack, IoCloseSharp } from "react-icons/io5";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Menu, Sidebar } from "react-pro-sidebar";
 import Form from "./pages/Home/components/Form";
 import Modal from "../../components/Modal";
@@ -9,10 +9,14 @@ import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
 
 import logo from "../../assets/funeral-logo.png";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Settings = () => {
+  const [images, setImages] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [toggled, setToggled] = useState(false);
+  const queryClient = useQueryClient();
   const location = useLocation();
   const params = useParams();
 
@@ -27,6 +31,8 @@ const Settings = () => {
     onSuccess: (res) => {
       console.log(res);
       toast.success("¡Image uploaded successfully!");
+      queryClient.invalidateQueries(["profile"]);
+      setOpenModal(false);
     },
     onError: (err) => {
       console.log(err);
@@ -37,6 +43,11 @@ const Settings = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!images.length) {
+      toast.error("No image selected");
+      return;
+    }
+
     const user_request = confirm(`Are you sure you want to change the image?`);
 
     if (!user_request) {
@@ -44,8 +55,10 @@ const Settings = () => {
     }
 
     const formData = new FormData();
-    formData.append("uploadImages", e?.target?.files[0]);
+    formData.append("file", images[0].file);
 
+    console.log(formData);
+    // return;
     changeImageMutation?.mutate(formData);
   };
 
@@ -92,7 +105,11 @@ const Settings = () => {
         setOpenModal={setOpenModal}
         openModal={openModal}
       >
-        <Form isPending={changeImageMutation?.isPending} />
+        <Form
+          isPending={changeImageMutation?.isPending}
+          setImages={setImages}
+          images={images}
+        />
       </Modal>
 
       <main className="flex-[60%] p-2">

@@ -1,9 +1,7 @@
 import ImagesHandle from "../../../../../components/ImagesHandle";
 import { useState } from "react";
 
-const Form = ({ isPending }) => {
-  const [images, setImages] = useState([]);
-
+const Form = ({ isPending, setImages, images }) => {
   return (
     <div>
       <ImagesHandle images={images} setImages={setImages} />
