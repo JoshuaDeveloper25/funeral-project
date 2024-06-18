@@ -25,6 +25,8 @@ const Home = () => {
     return console.log(error);
   }
 
+  console.log(data?.data?.profile_images);
+
   return (
     <section className="container-page">
       <div className="">
@@ -50,9 +52,7 @@ const Home = () => {
             {profileShapeImage === "circle" ? (
               <div className={`content`}>
                 <img
-                  src={
-                    "https://t4.ftcdn.net/jpg/03/45/77/73/360_F_345777366_ZsUyWRUIinLnYzbL610VNsPJHhwWCoNb.jpg"
-                  }
+                  src={`${data?.data?.profile_images?.cloud_front_domain}/${data?.data?.profile_images?.aws_file_name}`}
                 />
               </div>
             ) : (
@@ -66,9 +66,7 @@ const Home = () => {
                 }}`}
               >
                 <img
-                  src={
-                    "https://t4.ftcdn.net/jpg/03/45/77/73/360_F_345777366_ZsUyWRUIinLnYzbL610VNsPJHhwWCoNb.jpg"
-                  }
+                  src={`${data?.data?.profile_images?.cloud_front_domain}/${data?.data?.profile_images?.aws_file_name}`}
                 />
               </div>
             )}
@@ -86,9 +84,7 @@ const Home = () => {
                    ? "ms-auto"
                    : ""
                }`}
-                src={
-                  "https://t4.ftcdn.net/jpg/03/45/77/73/360_F_345777366_ZsUyWRUIinLnYzbL610VNsPJHhwWCoNb.jpg"
-                }
+                src={`${data?.data?.profile_images?.cloud_front_domain}/${data?.data?.profile_images?.aws_file_name}`}
               />
             ) : (
               <img
@@ -100,9 +96,7 @@ const Home = () => {
                  ? "ms-auto"
                  : ""
              }`}
-                src={
-                  "https://t4.ftcdn.net/jpg/03/45/77/73/360_F_345777366_ZsUyWRUIinLnYzbL610VNsPJHhwWCoNb.jpg"
-                }
+                src={`${data?.data?.profile_images?.cloud_front_domain}/${data?.data?.profile_images?.aws_file_name}`}
               />
             )}
           </div>
@@ -113,7 +107,7 @@ const Home = () => {
         <h2>{data?.data?.epitaph || "In loving memory of"}</h2>
         <h3 className="font-bold mb-1">{data?.data?.name}</h3>
         <h3>
-          <span className="font-bold">Lifetime</span>: {data?.data?.birth_date}{" "}
+          <span className="font-bold">Lifetime</span>: {data?.data?.birth_date}{" "}X
           - {data?.data?.death_date}
         </h3>
       </div>
